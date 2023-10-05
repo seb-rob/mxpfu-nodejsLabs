@@ -12,13 +12,14 @@ app.use(express.json());
 
 app.use("/user", (req,res,next)=>{
 // Middleware which tells that the user is authenticated or not
-   
+// console.log(req)
    if(req.session.authorization) {
        let token = req.session.authorization['accessToken']; // Access Token
-       
+    //    console.log(req.user)
        jwt.verify(token, "access",(err,user)=>{
            if(!err){
                req.user = user;
+            //    console.log(req.user)
                next();
            }
            else{
